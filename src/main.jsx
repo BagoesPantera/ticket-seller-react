@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import App from './App.jsx'
 import './index.css'
+
+// Pages
 import Login from './pages/login/index.jsx';
 import Register from './pages/register/index.jsx';
 import Home from './pages/home/index.jsx';
+import ForgotPassword from './pages/forgotPassword/index.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -21,6 +23,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
         <Route path="/register" element={
           <Register />
+        } />
+
+        <Route path="/forgot-password" element={
+          <ForgotPassword />
         } />
       </Routes>
     </BrowserRouter>

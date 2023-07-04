@@ -79,6 +79,7 @@ export default function Home(){
                     </div>
                 </div>
             </div>
+            {/* https://stackoverflow.com/a/75063696 */}
             <Footer />
         </div>
         </>

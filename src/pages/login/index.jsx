@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 export default function Login(){
     return(
         <div className="flex min-h-screen bg-gray-100 justify-center items-center">
-            <div className="w-full lg:w-4/12">
+            <div className="w-full lg:w-1/4">
                 <div className="bg-white min-h-screen lg:min-h-0 px-16 py-12 shadow-md rounded-lg ">
                     <div className="flex text-red-500 font-bold text-xl justify-center mb-12">
                         <img src="https://cdn.discordapp.com/attachments/940834033825349653/1125700596536721440/logo.png" alt="LOGO" width={100}/>
@@ -14,13 +14,13 @@ export default function Login(){
                     <div className="flex flex-col mt-4">
                         <form action="">
                             <div className="mb-5">
-                                <label htmlFor="email" className="block mb-2 text-sm font-semibold text-gray-500">Email</label>
-                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="email" placeholder="user@tisel.com" autoFocus required  />
+                                <label htmlFor="email" className="block mb-2 text-sm font-semibold text-gray-500">Surel</label>
+                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="email" placeholder="pengguna@tisel.com" autoFocus required  />
                                 <p></p>
                             </div>
                             <div className="mb-5">
                                 <label htmlFor="password" className="block mb-2 text-sm font-semibold text-gray-500">Kata sandi</label>
-                                <input className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="password" placeholder="secret" required />
+                                <input className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="password" placeholder="rahasia" required />
                                 <p></p>
                             </div>
                             <div className="flex flex-row items-center mx-1">

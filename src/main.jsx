@@ -9,6 +9,7 @@ import Register from './pages/register/index.jsx';
 import Home from './pages/home/index.jsx';
 import ForgotPassword from './pages/forgotPassword/index.jsx';
 import Booking from './pages/booking';
+import { handleLogin } from './controllers/authController';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -19,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         } />
 
         <Route path='/login' element={
-          <Login />
+          <Login handleLogin={handleLogin} />
         } />
 
         <Route path="/register" element={

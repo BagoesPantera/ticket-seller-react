@@ -1,6 +1,12 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom'
 
-export default function Login(){
+export default function Login(props){
+    const { handleLogin } = props
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [rememberMe, setRM] = useState(false);
+    
     return(
         <div className="flex min-h-screen bg-gray-100 justify-center items-center">
             <div className="w-full lg:w-1/4">
@@ -15,24 +21,25 @@ export default function Login(){
                         <form action="">
                             <div className="mb-5">
                                 <label htmlFor="email" className="block mb-2 text-sm font-semibold text-gray-500">Surel</label>
-                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="email" placeholder="pengguna@tisel.com" autoFocus required  />
+                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="email" placeholder="pengguna@tisel.com" autoFocus required  value={email} onChange={(e)=> setEmail(e.target.value)}/>
                                 <p></p>
                             </div>
                             <div className="mb-5">
                                 <label htmlFor="password" className="block mb-2 text-sm font-semibold text-gray-500">Kata sandi</label>
-                                <input className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="password" placeholder="rahasia" required />
+                                <input className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="password" placeholder="rahasia" required value={password} onChange={(e)=> setPassword(e.target.value)} />
                                 <p></p>
                             </div>
                             <div className="flex flex-row items-center mx-1">
-                                <input className="mr-4" type="checkbox" />
+                                <input className="mr-4" type="checkbox" onChange={(e) => setRM(e.target.checked)}/>
                                 <label htmlFor="checkbox" className="block text-sm font-semibold text-gray-500">Ingat saya</label>
                             </div>
+                           
                         </form>
-                        <div className="flex justify-center mt-6">
-                            <button className="w-full px-4 py-2 font-semibold bg-gradient-to-tr from-rose-600 to-red-500 text-white rounded-md focus:outline-none border focus:border-red-300 focus:ring focus:ring-red-100" >
-                                LOGIN
-                            </button>
-                        </div>
+                         <div className="flex justify-center mt-6">
+                                <button className="w-full px-4 py-2 font-semibold bg-gradient-to-tr from-rose-600 to-red-500 text-white rounded-md focus:outline-none border focus:border-red-300 focus:ring focus:ring-red-100" onClick={() => {handleLogin(email, password, rememberMe)}}>
+                                    LOGIN
+                                </button>
+                            </div>
                         <div className="flex flex-row mt-8">
                             <a  className="text-gray-500 font-semibold text-sm" >
                                 Belum punya akun?

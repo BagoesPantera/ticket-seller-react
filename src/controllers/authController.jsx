@@ -32,8 +32,24 @@ export async function handleLogin(email, password, rememberMe) {
     return back
 }
 
-export async function handleRegister(email, password, username){
+export async function handleRegister(email, password, confirmPass, username){
     let back
+    const errors = {}
+
+    // handling error
+    if (typeof email !== "string" || !email.includes("@")) {
+        errors.surel = "Kayanya itu bukan email 🤔";
+    }
+    if (typeof password !== "string" || password.length < 6) {
+        errors.password = "Kata sandi harus lebih dari 6 karakter!";
+    }
+    if (password !== confirmPass) {
+        errors.confirm = "Kata Sandi dan Konfirmasi Kata Sandi beda!"
+    }
+    if (Object.keys(errors).length) {
+        throw errors;
+    }
+
     await firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((res) => {
         return firebase.auth().currentUser.updateProfile({
@@ -42,21 +58,24 @@ export async function handleRegister(email, password, username){
             back = true
             localStorage.setItem("signin", true);
         }).catch((error) => {
-            console.log(error);
+            throw error
         });
     }).catch(err => {
         switch(err.code){
             case "auth/email-already-in-use":
             case "auth/invalid-email":
-                console.log(err.message);
+                errors.surel = "Aduh, emailnya udah dipakai 😭"
                 back = false
                 break;
             case "auth/weak-password":
-                console.log(err.message);
+                errors.password = "Passwordmu gampang dihack itu. Ganti!"
                 back = false
                 break;
         }
     })
+    if (Object.keys(errors).length) {
+        throw errors;
+    }
     return back
 }
 

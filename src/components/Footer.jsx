@@ -37,9 +37,7 @@ export default function Footer() {
                             </div>
                         </div>
                         <div className="flex items-center justify-center font-Roboto text-sm py-4 pt-8 text-center">
-                            <td>
-                                <tr>Made with ❤</tr>
-                            </td>
+                            <p>Made with ❤</p>
                         </div>
                     </div>
                 </div>

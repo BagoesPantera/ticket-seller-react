@@ -7,8 +7,8 @@ export default function Booking() {
         <div className="flex bg-gray-100 min-h-screen justify-center ">
             <div className="flex flex-col w-full items-center">
                 <div className="flex flex-col items-center mt-14">
-                    <tr className=" text-3xl font-bold bg-gradient-to-tr from-rose-600 to-red-400 inline text-transparent bg-clip-text">Booking Dulu</tr>
-                    <tr className=" text-md font-medium text-rose-600 mt-2">biar ga salah paham</tr>
+                    <p className=" text-3xl font-bold bg-gradient-to-tr from-rose-600 to-red-400 inline text-transparent bg-clip-text">Booking Dulu</p>
+                    <p className=" text-md font-medium text-rose-600 mt-2">biar ga salah paham</p>
                 </div>
                 <div className="flex flex-col pb-6 shadow-sm bg-white mt-10 w-8/12 justify-center rounded-lg border border-gray-200 mb-28">
                     <div className="px-4 py-5 bg-white border-b rounded-t-lg border-gray-200 sticky top-0">
@@ -31,9 +31,9 @@ export default function Booking() {
                             <div className="mb-5">
                                 <label htmlFor="number" className="block mb-2 text-sm font-semibold text-gray-500">Lapangan</label>
                                 <select className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" required>
-                                    <option selected>Pilih lapangan</option>
-                                    <option value="basket">Basket</option>
-                                    <option value="bultang">Bulu Tangkis</option>
+                                    <option disabled>Pilih lapangan</option>
+                                    <option value="Basket">Basket</option>
+                                    <option value="Bulu Tangkis">Bulu Tangkis</option>
                                 </select>
                             </div>
                             <div className="flex flex-col lg:flex-row lg:justify-between">
@@ -52,13 +52,13 @@ export default function Booking() {
                                     <input className="hidden" type="file" name="" id="file" accept="image/*" required/>
                                     <label  className="flex justify-center w-full border-dashed border-2 h-56 mb-6" htmlFor="file">
                                         <svg className="w-32 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                         </svg>        
                                     </label>
                                     <label className="flex w-28 justify-between items-center bg-gray-200 px-3 py-2 rounded-md text-gray-500 text-sm font-semibold hover:bg-gray-300" htmlFor="file">
                                         Pilih foto
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                         </svg>
                                     </label>
                                 </div>

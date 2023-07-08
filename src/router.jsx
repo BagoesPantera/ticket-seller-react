@@ -6,30 +6,31 @@ import Login, {action as loginAction} from "./pages/login";
 import Register, {action as registerAction} from "./pages/register";
 import ForgotPassword, {action as forgotPassAction} from "./pages/forgotPassword";
 import Booking from "./pages/booking";
+import { ProtectedLogin, ProtectedRoute } from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <ProtectedRoute><Home /></ProtectedRoute>,
   },
   {
     path: "/login",
     action: loginAction,
-    element: <Login />,
+    element:  <ProtectedLogin><Login /></ProtectedLogin>,
   },
   {
     path: "/register",
     action: registerAction,
-    element: <Register />,
+    element: <ProtectedLogin><Register /></ProtectedLogin>,
   },
   {
     path: "/forgot-password",
     action: forgotPassAction,
-    element: <ForgotPassword />,
+    element: <ProtectedLogin><ForgotPassword /></ProtectedLogin>,
   },
   {
     path: "/booking",
-    element: <Booking />,
+    element: <ProtectedRoute><Booking /></ProtectedRoute>,
   },
 ]);
 

@@ -12,6 +12,7 @@ export async function handleLogin(email, password, rememberMe) {
         return firebase.auth().signInWithEmailAndPassword(email, password)
         .then((user) => {
             back = true
+            localStorage.setItem("signin", true);
           });
     })
     .catch(err => {
@@ -39,6 +40,7 @@ export async function handleRegister(email, password, username){
           displayName: username
         }).then(()=>{
             back = true
+            localStorage.setItem("signin", true);
         }).catch((error) => {
             console.log(error);
         });
@@ -69,10 +71,13 @@ export async function handleForgotPass(email) {
     return back
 }
 
-export async function handleLogout() {
+export function handleLogout() {
     firebase.auth().signOut().then(() => {
         //success
+        localStorage.removeItem("signin");
     }).catch((error) => {
         //error
     });
+    // this is so baaaaad
+    window.location.replace('/');
 }

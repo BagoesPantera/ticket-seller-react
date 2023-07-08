@@ -6,8 +6,8 @@ export async function action({request}) {
         const formData = await request.formData();
         const data = Object.fromEntries(formData);
         
-        console.log(data.username, data.surel, data.password, data.confirmpass);
-        const resp = await handleRegister(data.surel, data.password)
+        // add confirm pass check
+        const resp = await handleRegister(data.surel, data.password, data.username)
         console.log(resp);
         if(resp){
             return redirect('/')

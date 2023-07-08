@@ -31,11 +31,17 @@ export async function handleLogin(email, password, rememberMe) {
     return back
 }
 
-export async function handleRegister(email, password){
+export async function handleRegister(email, password, username){
     let back
     await firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((user) => {
-        back = true
+    .then((res) => {
+        return firebase.auth().currentUser.updateProfile({
+          displayName: username
+        }).then(()=>{
+            back = true
+        }).catch((error) => {
+            console.log(error);
+        });
     }).catch(err => {
         switch(err.code){
             case "auth/email-already-in-use":

@@ -37,7 +37,7 @@ export default function Register(){
                             </div>
                             <div className="mb-5">
                                 <label htmlFor="email" className="block mb-2 text-sm font-semibold text-gray-500">Surel</label>
-                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:border-red-500 focus:bg-white focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3"  placeholder="pengguna@tisel.com" required  name='surel'/>
+                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:border-red-500 focus:bg-white focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type='email' placeholder="pengguna@tisel.com" required  name='surel'/>
                                 {err?.surel && <p className='text-sm text-red-600'>{err.surel}</p>}
                             </div>
                             <div className="flex flex-col lg:flex-row lg:justify-between">

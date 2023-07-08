@@ -1,4 +1,4 @@
-import { NavLink, Form, redirect } from 'react-router-dom'
+import { NavLink, Form, redirect, useActionData } from 'react-router-dom'
 import { handleLogin } from '../../controllers/authController';
 
 export async function action({request}) {
@@ -18,6 +18,7 @@ export async function action({request}) {
 }
 
 export default function Login(){
+    const err = useActionData()
     return(
         <div className="flex min-h-screen bg-gray-100 justify-center items-center">
             <div className="w-full lg:w-1/4">
@@ -29,11 +30,12 @@ export default function Login(){
                         Login Kuy
                     </div>
                     <div className="flex flex-col mt-4">
+                        {err?.firebase &&  <span className="text-sm font-medium px-2.5 py-0.5 rounded bg-red-700 text-white">{err.firebase}</span>}
                         <Form method='post'>
                             <div className="mb-5">
                                 <label htmlFor="email" className="block mb-2 text-sm font-semibold text-gray-500">Surel</label>
                                 <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="email" placeholder="pengguna@tisel.com" autoFocus required  name='surel'/>
-                                <p></p>
+                                {err?.surel && <p className='text-sm text-red-600'>{err.surel}</p>}
                             </div>
                             <div className="mb-5">
                                 <label htmlFor="password" className="block mb-2 text-sm font-semibold text-gray-500">Kata sandi</label>

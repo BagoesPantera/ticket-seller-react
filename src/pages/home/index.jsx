@@ -1,24 +1,6 @@
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default function Home(){
-
-    // login or nah
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        console.log(uid);
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        console.log("out");
-      }
-    });
-
     return(
         <>
         <Navbar />
@@ -68,13 +50,13 @@ export default function Home(){
                 </div>
                 <div className="flex flex-col px-6 py-4 overflow-auto">
                     <div className="flex flex-col text-gray-500 font-Roboto text-xs lg:text-sm ">
-                        <table className="table-auto">
-                        <thead className="bg-gray-200">
+                        <table className="table-auto text-center">
+                            <thead className="bg-gray-200">
                                 <tr>
-                                    <td className="text-gray-400 py-2 px-2 rounded-l-md">Pemesan</td>
-                                    <td className="text-gray-400 py-2 px-2">Lapangan</td>
-                                    <td className="text-gray-400 py-2 px-2">Waktu</td>
-                                    <td className="text-gray-400 py-2 px-2 rounded-r-md">Status</td>
+                                    <th className="text-gray-400 py-2 px-2 rounded-l-md">Pemesan</th>
+                                    <th className="text-gray-400 py-2 px-2">Lapangan</th>
+                                    <th className="text-gray-400 py-2 px-2">Waktu</th>
+                                    <th className="text-gray-400 py-2 px-2 rounded-r-md">Status</th>
                                 </tr>
                             </thead>
                             <tbody className="bg-scroll">

@@ -90,12 +90,31 @@ export async function handleRegister(email, password, confirmPass, username){
 
 export async function handleForgotPass(email) {
     let back
-    firebase.auth().sendPasswordResetEmail(email)
+    const errors = {}
+
+    // handling error
+    if (typeof email !== "string" || !email.includes("@")) {
+        errors.surel = "Kayanya itu bukan email 🤔";
+    }
+    if (Object.keys(errors).length) {
+        throw errors;
+    }
+
+    await firebase.auth().sendPasswordResetEmail(email)
     .then(() => {
         back = true
-    }).catch((error) => {
-        back = false
+    }).catch(err => {
+        switch (err.code) {
+            case "auth/invalid-email":
+            case 'auth/user-not-found':
+                errors.firebase = "Surel mu ga ada!"
+                back = false
+                break;
+        }
     });
+    if (Object.keys(errors).length) {
+        throw errors;
+    }
     return back
 }
 

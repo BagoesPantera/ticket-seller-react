@@ -30,3 +30,24 @@ export async function handleLogin(email, password, rememberMe) {
     })
     return back
 }
+
+export async function handleRegister(email, password){
+    let back
+    await firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((user) => {
+        back = true
+    }).catch(err => {
+        switch(err.code){
+            case "auth/email-already-in-use":
+            case "auth/invalid-email":
+                console.log(err.message);
+                back = false
+                break;
+            case "auth/weak-password":
+                console.log(err.message);
+                back = false
+                break;
+        }
+    })
+    return back
+}

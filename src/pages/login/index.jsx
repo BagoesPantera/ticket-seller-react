@@ -7,7 +7,6 @@ export async function action({request}) {
         const updates = Object.fromEntries(formData);
 
         const resp = await handleLogin(updates.surel, updates.password, updates.checked)
-        console.log(resp);
         if(resp){
             return redirect('/')
         }else{

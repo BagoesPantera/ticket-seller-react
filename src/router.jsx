@@ -4,7 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/home";
 import Login, {action as loginAction} from "./pages/login";
 import Register, {action as registerAction} from "./pages/register";
-import ForgotPassword from "./pages/forgotPassword";
+import ForgotPassword, {action as forgotPassAction} from "./pages/forgotPassword";
 import Booking from "./pages/booking";
 
 const router = createBrowserRouter([
@@ -24,6 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/forgot-password",
+    action: forgotPassAction,
     element: <ForgotPassword />,
   },
   {

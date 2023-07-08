@@ -58,6 +58,17 @@ export async function handleRegister(email, password, username){
     return back
 }
 
+export async function handleForgotPass(email) {
+    let back
+    firebase.auth().sendPasswordResetEmail(email)
+    .then(() => {
+        back = true
+    }).catch((error) => {
+        back = false
+    });
+    return back
+}
+
 export async function handleLogout() {
     firebase.auth().signOut().then(() => {
         //success

@@ -1,0 +1,14 @@
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/analytics';
+
+var firebaseConfig = {
+    YOUR FIREBASE CONFIG HERE
+};
+
+// Initialize Firebase
+const fire = firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+export default fire;

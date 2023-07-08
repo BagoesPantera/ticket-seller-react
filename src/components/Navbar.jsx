@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { handleLogout } from '../controllers/authController'
 
 export default function Navbar() {
     const [isMobile, setIsMobile] = useState(false)
@@ -48,7 +49,7 @@ export default function Navbar() {
                                     Notifikasi
                             </div>
                             </NavLink>
-                            <button >Logout</button>
+                            <button onClick={handleLogout}>Logout</button>
                         </div>
                     </div>
                 </div>

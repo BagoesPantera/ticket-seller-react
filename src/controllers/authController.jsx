@@ -51,3 +51,11 @@ export async function handleRegister(email, password){
     })
     return back
 }
+
+export async function handleLogout() {
+    firebase.auth().signOut().then(() => {
+        //success
+    }).catch((error) => {
+        //error
+    });
+}

@@ -13,6 +13,10 @@ export async function handleLogin(email, password, rememberMe) {
     if (typeof email !== "string" || !email.includes("@")) {
         errors.surel = "Kayanya itu bukan email 🤔";
     }
+    if (Object.keys(errors).length) {
+        throw errors;
+    }
+    
     await firebase.auth().setPersistence(rememberMe ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION)
     .then(() => {
         return firebase.auth().signInWithEmailAndPassword(email, password)

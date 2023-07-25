@@ -4,7 +4,14 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/analytics';
 
 var firebaseConfig = {
-    YOUR FIREBASE CONFIG HERE
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
+  databaseURL: "",
 };
 
 // Initialize Firebase

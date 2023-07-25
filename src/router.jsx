@@ -5,7 +5,7 @@ import Home from "./pages/home";
 import Login, {action as loginAction} from "./pages/login";
 import Register, {action as registerAction} from "./pages/register";
 import ForgotPassword, {action as forgotPassAction} from "./pages/forgotPassword";
-import Booking from "./pages/booking";
+import Booking, {action as bookingAction} from "./pages/booking";
 import { ProtectedLogin, ProtectedRoute } from "./ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -30,6 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/booking",
+    action: bookingAction,
     element: <ProtectedRoute><Booking /></ProtectedRoute>,
   },
 ]);

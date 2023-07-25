@@ -1,6 +1,26 @@
+import { NavLink, Form, redirect, useActionData } from 'react-router-dom'
 import Navbar from "../../components/Navbar";
+import { store } from '../../controllers/bookingController';
+
+export async function action({request}) {
+    try {
+        const formData = await request.formData();
+        const data = Object.fromEntries(formData);
+
+        const resp = await store(data.nama, data.surel, data.hp, data.lapangan, data.tanggal, data.jam)
+
+        if(resp){
+            return redirect('/')
+        }else{
+            return null //failed
+        }
+    } catch (err) {
+        return err
+    }
+}
 
 export default function Booking() {
+    const err = useActionData()
     return (
         <>
         <Navbar />
@@ -15,23 +35,23 @@ export default function Booking() {
                         <a className="font-bold text-xl bg-gradient-to-l from-rose-600 to-red-400 inline text-transparent bg-clip-text">Data Pemesan</a>
                     </div>
                     <div className="p-5">
-                        <form action="">
+                        <Form method='post'>
                             <div className="mb-5">
                                 <label htmlFor="name" className="block mb-2 text-sm font-semibold text-gray-500">Nama Pemesan</label>
-                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="name" placeholder="Noki Tisel" required autoFocus/>
+                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="name" placeholder="Noki Tisel" required autoFocus name='nama'/>
                             </div>
                             <div className="mb-5">
                                 <label htmlFor="email" className="block mb-2 text-sm font-semibold text-gray-500">Surel</label>
-                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="email" placeholder="pengguna@tisel.com" required/>
+                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="email" placeholder="pengguna@tisel.com" required name='surel'/>
                             </div>
                             <div className="mb-5">
                                 <label htmlFor="number" className="block mb-2 text-sm font-semibold text-gray-500">No. Hp</label>
-                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="text" placeholder="08123456789" required/>
+                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="number" placeholder="08123456789" required name='hp'/>
                             </div>
                             <div className="mb-5">
                                 <label htmlFor="number" className="block mb-2 text-sm font-semibold text-gray-500">Lapangan</label>
-                                <select className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" required>
-                                    <option disabled>Pilih lapangan</option>
+                                <select className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" required name='lapangan' defaultValue='DEFAULT'>
+                                    <option value='DEFAULT' disabled>Pilih lapangan</option>
                                     <option value="Basket">Basket</option>
                                     <option value="Bulu Tangkis">Bulu Tangkis</option>
                                 </select>
@@ -39,17 +59,17 @@ export default function Booking() {
                             <div className="flex flex-col lg:flex-row lg:justify-between">
                                 <div className="mb-5 lg:w-8/12">
                                     <label htmlFor="text" className="block mb-2 text-sm font-semibold text-gray-500">Tanggal</label>
-                                    <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="date" required/>
+                                    <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="date" required name='tanggal'/>
                                 </div>
                                 <div className="mb-5 lg:w-3/12">
                                     <label htmlFor="text" className="block mb-2 text-sm font-semibold text-gray-500">Jam</label>
-                                    <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="time" required/>
+                                    <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:bg-white focus:border-red-500 focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="time" required name='jam'/>
                                 </div>
                             </div>
                             <div className="mb-5">
                                 <label htmlFor="number" className="block mb-4 text-sm font-semibold text-gray-500">Foto KTP / Kartu Pelajar</label>
                                 <div className="w-8/12">
-                                    <input className="hidden" type="file" name="" id="file" accept="image/*" required/>
+                                    <input className="hidden" type="file" name="" id="file" accept="image/*"/>
                                     <label  className="flex justify-center w-full border-dashed border-2 h-56 mb-6" htmlFor="file">
                                         <svg className="w-32 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -66,7 +86,9 @@ export default function Booking() {
                             <button className="w-full px-4 py-2 font-semibold bg-gradient-to-tr from-rose-600 to-red-500 text-white rounded-md focus:outline-none border focus:border-red-300 focus:ring focus:ring-red-100" >
                                 SUBMIT
                             </button>
-                        </form>
+                        </Form>
+                        {/* change this to better design later ;) */}
+                        {err?.err && <p className='text-xl text-red-600'>{err.err}</p>}
                     </div>
                 </div>
             </div>

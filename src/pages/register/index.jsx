@@ -18,7 +18,8 @@ export async function action({request}) {
 }
 
 export default function Register(){
-    const err =  useActionData();
+    const actionData =  useActionData();
+    const err = actionData?.fieldErrors
     return(
         <div className="flex min-h-screen bg-gray-100 justify-center items-center">
             <div className="w-full lg:w-1/4">
@@ -30,26 +31,28 @@ export default function Register(){
                         Ayo Buat Akun
                     </div>
                     <div className="flex flex-col mt-4">
+                        {actionData?.firebase &&  <span className="text-sm font-medium px-2.5 py-0.5 rounded bg-red-700 text-white">{actionData.firebase}</span>}
                         <Form method='post'>
                             <div className="mb-5">
                                 <label htmlFor="username" className="block mb-2 text-sm font-semibold text-gray-500">Nama Pengguna</label>
                                 <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:border-red-500 focus:bg-white focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="username" placeholder="penggunakeren11" autoFocus required name='username'/>
+                                {err?.username && <p className='text-sm text-red-600'>{err.username?.[0]}</p>}
                             </div>
                             <div className="mb-5">
                                 <label htmlFor="email" className="block mb-2 text-sm font-semibold text-gray-500">Surel</label>
-                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:border-red-500 focus:bg-white focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type='email' placeholder="pengguna@tisel.com" required  name='surel'/>
-                                {err?.surel && <p className='text-sm text-red-600'>{err.surel}</p>}
+                                <input className=" bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:border-red-500 focus:bg-white focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="email" placeholder="pengguna@tisel.com" required  name='surel'/>
+                                {err?.email && <p className='text-sm text-red-600'>{err.email?.[0]}</p>}
                             </div>
                             <div className="flex flex-col lg:flex-row lg:justify-between">
                                 <div className="mb-5 lg:w-5/12">
                                     <label htmlFor="password" className="block mb-2 text-sm font-semibold text-gray-500">Kata sandi</label>
                                     <input className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:border-red-500 focus:bg-white focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="password" placeholder="rahasia" required name='password' />
-                                    {err?.password && <p className='text-sm text-red-600'>{err.password}</p>}
+                                    {err?.password && <p className='text-sm text-red-600'>{err.password?.[0]}</p>}
                                 </div>
                                 <div className="mb-5 lg:w-5/12">
                                     <label htmlFor="password" className="block mb-2 text-sm font-semibold text-gray-500">Konfirmasi kata sandi</label>
                                     <input className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:border-red-500 focus:bg-white focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="password" placeholder="rahasia" required name='confirmpass'/>
-                                    {err?.confirm && <p className='text-sm text-red-600'>{err.confirm}</p>}
+                                    {err?.confirmPass && <p className='text-sm text-red-600'>{err.confirmPass?.[0]}</p>}
                                 </div>
                             </div>
                             <div className="flex justify-center mt-4">

@@ -24,5 +24,4 @@ dist-ssr
 *.sw?
 
 # FIREBASE
-src/config/fire.jsx
 .env

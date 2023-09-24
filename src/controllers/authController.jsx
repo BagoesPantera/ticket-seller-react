@@ -2,8 +2,9 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/analytics';
-import fire from '../config/fire';
 import { z } from 'zod';
+import {projectAuth} from "../config/fire.jsx";
+import {signOut,getAuth} from "firebase/auth";
 
 export async function handleLogin(email, password, rememberMe) {
     let back
@@ -21,16 +22,12 @@ export async function handleLogin(email, password, rememberMe) {
     if (!validationLogin.success){
         throw validationLogin.error.flatten()
     }
-    
-    await firebase.auth().setPersistence(rememberMe ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION)
-    .then(() => {
-        return firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((user) => {
-            back = true
-            localStorage.setItem("signin", true);
-          });
-    })
-    .catch(err => {
+
+    try {
+        await projectAuth.setPersistence(rememberMe ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION)
+        await projectAuth.signInWithEmailAndPassword(email, password);
+        return true
+    }catch (err) {
         switch(err.code){
             case "auth/invalid-email":
             case "auth/user-disabled":
@@ -43,7 +40,7 @@ export async function handleLogin(email, password, rememberMe) {
                 back = false
                 break;
         }
-    })
+    }
     if (Object.keys(errors).length) {
         throw errors;
     }
@@ -136,14 +133,11 @@ export async function handleForgotPass(email) {
     return back
 }
 
-export function handleLogout() {
-    firebase.auth().signOut().then(() => {
-        //success
-        localStorage.removeItem("signin");
-    }).catch((error) => {
-        //error
-        throw error
-    });
-    // this is so baaaaad
-    window.location.replace('/');
+export async function handleLogout() {
+    const auth = getAuth()
+    try {
+        await signOut(auth);
+    } catch (error) {
+        console.log(error)
+    }
 }

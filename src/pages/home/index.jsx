@@ -1,6 +1,33 @@
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
+import {useEffect, useState} from "react";
+import {getDatabase, onValue, ref} from "firebase/database";
+import {app} from "../../config/fire.jsx";
+
+function dateFormat(time){
+    var strToDate = new Date(time);
+    const date = new Date(strToDate);
+    const month = date.toLocaleString('default', { month: 'long' });
+    const day = date.toLocaleString('default', { day: '2-digit' });
+    const year = date.toLocaleString('default', { year: 'numeric' });
+
+    return `${day} ${month} ${year}`;
+}
+
 export default function Home(){
+    const [bookingData, setBookingData] = useState()
+
+    useEffect(() => {
+        const starCountRef = ref(getDatabase(app), 'bookingData/')
+        onValue(starCountRef, function(snapshot){
+            const data = snapshot.val()
+            const newData = Object.keys(data).map(key => ({
+                id:key,
+                ...data[key]
+            }))
+            setBookingData(newData)
+        })
+    }, []);
     return(
         <>
         <Navbar />
@@ -54,24 +81,24 @@ export default function Home(){
                             <thead className="bg-gray-200">
                                 <tr>
                                     <th className="text-gray-400 py-2 px-2 rounded-l-md">Pemesan</th>
+                                    <th className="text-gray-400 py-2 px-2">Email</th>
                                     <th className="text-gray-400 py-2 px-2">Lapangan</th>
-                                    <th className="text-gray-400 py-2 px-2">Waktu</th>
-                                    <th className="text-gray-400 py-2 px-2 rounded-r-md">Status</th>
+                                    <th className="text-gray-400 py-2 px-2 rounded-r-md">Tanggal [Jam]</th>
                                 </tr>
                             </thead>
                             <tbody className="bg-scroll">
-                                <tr className="border-b border-gray-200">
-                                    <td className="px-2 pb-2 pt-4">Sakunoki</td>
-                                    <td className="px-2 pb-2 pt-4">Basket</td>
-                                    <td className="px-2 pb-2 pt-4">21.00 - 22.00</td>
-                                    <td className="px-2 pb-2 pt-4">Dibooking</td>
-                                </tr>
-                                <tr className="border-b border-gray-200">
-                                    <td className="px-2 pb-2 pt-4">Hyemu</td>
-                                    <td className="px-2 pb-2 pt-4">Badminton</td>
-                                    <td className="px-2 pb-2 pt-4">10.00 - 11.00</td>
-                                    <td className="px-2 pb-2 pt-4">Dibooking</td>
-                                </tr>
+                            {
+                                bookingData?.map((item, index) => {
+                                    return (
+                                        <tr className="border-b border-gray-200" key={index}>
+                                            <td className="px-2 pb-2 pt-4">{item.nama}</td>
+                                            <td className="px-2 pb-2 pt-4">{item.emails}</td>
+                                            <td className="px-2 pb-2 pt-4">{item.lapangan}</td>
+                                            <td className="px-2 pb-2 pt-4">{`${dateFormat(item.tanggal)} [${item.jam}]`}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
                             </tbody>
                         </table>
                     </div>

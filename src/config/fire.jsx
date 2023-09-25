@@ -14,9 +14,9 @@ var firebaseConfig = {
   databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 firebase.setLogLevel("silent")
 
 const projectAuth = firebase.auth()
 
-export { projectAuth }
+export { app, projectAuth }
